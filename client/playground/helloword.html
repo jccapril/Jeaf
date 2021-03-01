@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"> 
+        <p>Hello,{{ msg }}</p>
+        <input type="text" v-model="msg">
+        <h3>1、双大括号输出文本内容</h3>
+        <p>普通文本：{{ msg }}</p>
+        <p> JS表达式：{{ number + 1 }} </p>
+        <h3>2、一次性插值v-once</h3>
+        <p><span v-once>这个值不会改变{{msg}}</span></p>
+        <h3>3、v-html 指令输出真正的 HTML 内容</h3>
+        <p>双大括号:{{ contentHtml }}</p>
+        <p>v-html指令：<span v-html="contentHtml"></span></p>
+        <h3>4、v-bind 属性绑定指令</h3>
+        <img v-bind:src="imgSrc" alt="VueLogo">
+        <h3>5、v-on 事件绑定指令</h3>
+        <input type="text" v-model="num">
+        <button v-on:click="add">点击+1</button>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'Vue.js',
+                number: 1,
+                contentHtml: '<span style="color:red">红色字体内容<script>alert("hello vue")<\/script></span>',
+                imgSrc:'https://cn.vuejs.org/images/logo.png',
+                num: 1
+            },
+            methods: {
+                add:function(){
+                    console.log('add被调用')
+                    this.num++
+                }
+            },
+        })
+    </script>
+</body>
+</html>

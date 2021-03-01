@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .active{
+            color: green
+        }
+        .delete{
+            color: red;
+        }
+        .error{
+            font-size: 30px;
+        }
+    </style>
+    <div id="app">
+        <h2>Class绑定，v-bind:class 或 :class</h2>
+        <!--activeClass会从data中获取值为active,则对应样式为绿色-->
+        <p v-bind:class="activeClass">字符串表达式</p>
+        <p :class="{delete:isDelete,error:hasError}">对象表达式</p>
+        <p :class="['delete','error']">数组表达式</p>
+        <h2>Style绑定, v-bind:style 或 :class</h2>
+        <p :style="{color:activeColor,fontSize:fontSize+'px'}">Style绑定</p>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                activeClass: 'active',
+                isDelete: true,
+                hasError: true,
+                activeColor: 'red',
+                fontSize: 50
+            }
+        })
+    </script>
+</body>
+</html>

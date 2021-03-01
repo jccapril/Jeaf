@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>数学：<input type="text" v-model="mathScore"></p>
+        <p>英语：<input type="text" v-model="englishScore"></p>
+        <p>总分（methods-单向）：<input type="text" v-model="sumScore()"></p>
+        <p>总分（computed-单向）：<input type="text" v-model="sumScore1"></p>
+        <p>总分（computed-双向）：<input type="text" v-model="sumScore2"></p>
+        <p>总分（监听器 watch）：<input type="text" v-model="sumScore3"></p>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                mathScore: 80,
+                englishScore: 80,
+                sumScore3: 160
+            },
+            methods: {
+                sumScore: function () {
+                    // -0是因为input会变成字符串，通过-0转化为数字运算
+                    return (this.mathScore - 0) + (this.englishScore - 0)
+                }
+            },
+            computed: {
+                sumScore1: function () {
+                    return (this.mathScore - 0) + (this.englishScore - 0)
+                },
+                sumScore2: {
+                    get: function () {
+                        return (this.mathScore - 0) + (this.englishScore - 0)
+                    },
+                    set: function (newValue) {
+                        var avgScore = newValue / 2
+                        this.mathScore = avgScore
+                        this.englishScore = avgScore
+                    }
+                }
+            },
+            // 监听器1
+            watch: {
+                // 坚挺mathScore放生变化时
+                mathScore: function (newValue, oldValue) {
+                    this.sumScore3 = (newValue - 0) + (this.englishScore - 0)
+                }
+            }
+        })
+        // 监听器2
+        vm.$watch('englishScore',function(newValue) {
+            this.sumScore3 = (newValue - 0) + (this.mathScore - 0)
+        })
+    </script>
+
+</body>
+
+</html>

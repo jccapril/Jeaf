@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3>1、事件处理方法</h3>
+        <p><button @click="say">Say{{msg}}</button></p>
+        <p><button @click="warn('hello',$event)">Warn</button></p>
+        <h3>2、事件修饰符</h3>
+        <div @click="todo">
+            <button @click="doThis">单击事件会继续传播</button>
+        </div>
+        <div @click="todo">
+            <button @click.stop="doThis">阻止单击事件会继续传播</button>
+        </div>
+        <a href="https://www.baidu.com" @click.prevent="doStop">百度</a>
+        <p><button @click.once="doOnly">点击事件将只会触发一次: {{num}}</button></p>
+        <h3>3、按键修饰符</h3>
+        <input @keyup.enter="keyEnter">
+        <input @keyup.space="keySpace">
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Hello',
+                num: 1
+            },
+            methods: {
+                say: function (e) {
+                    alert(this.msg)
+                    // e是原生DOM事件
+                    alert(e.target.innerHTML)
+                },
+                // 多参数，$event是原生Dom事件
+                warn: function (msg, e) {
+                    alert(msg + ',' + e.target.tagName)
+                },
+                todo: function () {
+                    alert('todo...')
+                },
+                doThis: function () {
+                    alert('dothis...')
+                },
+                doStop: function () {
+                    alert('href默认跳转被阻止')
+                },
+                doOnly: function () {
+                    this.num++
+                },
+                keyEnter: function () {
+                    alert("已按:回车键")
+                },
+                keySpace: function () {
+                    alert("已按:空格键")
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

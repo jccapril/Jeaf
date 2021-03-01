@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <form action="#" @submit.prevent="submitForm">
+            <input name="name" type="text" v-model="name">
+            <br>
+            <input name="sex" type="radio" value="1" v-model="sex">男
+            <input name="sex" type="radio" value="0" v-model="sex">女
+            <br>
+            <input type="checkbox" name="skills" value="Vue" v-model="skills">Vue
+            <input type="checkbox" name="skills" value="Golang" v-model="skills">Golang
+            <input type="checkbox" name="skills" value="iOS" v-model="skills">iOS
+            <br>
+            <select name="citys" v-model="city">
+                <option v-for="c in citys" :value="c.code">
+                    {{c.name}}
+                </option>
+            </select>
+            <br>
+            说明（多行文本）：<textarea name="desc" cols="30" rows="10" v-model="desc"></textarea>
+            <br>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: '法外狂徒-张三',
+                sex: '1',
+                skills: ['Vue','Golang','iOS'],
+                citys: [
+                    {code:'sh',name:'上海'},
+                    {code:'bj',name:'北京'},
+                    {code:'gz',name:'广州'},
+                ],
+                city: 'sh',
+                desc: ''
+            },
+            methods: {
+                submitForm:function(){
+                    alert(this.name+","+this.sex+","+this.skills+","+this.city+","+this.desc)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

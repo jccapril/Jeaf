@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        /* 显示和隐藏的过度 */
+        .box1-enter-active,.box1-leave-active {
+            transition: opacity 1s;
+        }
+        /* 显示前和隐藏后 */
+        .box1-enter,.box1-leave-to {
+            opacity: 0;
+        }
+        .box2-enter-active {
+            transition: all 1s;
+        }
+        .box2-leave-active {
+            transition: all 5s;
+        }
+        .box2-enter,.box2-leave-to {
+            opacity: 0;
+            transform: translateX(10px);
+        }
+        .box3-enter-active {
+            animation: bounce-in 1s;
+        }
+        .box3-leave-active {
+            animation: bounce-in 3s reverse;
+        }
+        @keyframes bounce-in {
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(1.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+
+    </style>
+    <div id="app1">
+        <button @click="show=!show">渐变过渡</button>
+        <transition name="box1">
+            <p v-if="show">box1</p>
+        </transition>
+    </div>
+    <div id="app2">
+        <button @click="show=!show">渐变过渡</button>
+        <transition name="box2">
+            <p v-if="show">box2</p>
+        </transition>
+    </div>
+    <div id="app3">
+        <button @click="show=!show">渐变过渡</button>
+        <transition name="box3">
+            <p v-if="show" style="display: inline-block"> 
+                陪你学习，伴你成长
+            </p>
+        </transition>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm1 = new Vue({
+            el: '#app1',
+            data:{
+                show: true
+            }
+        })
+        var vm2 = new Vue({
+            el: '#app2',
+            data:{
+                show: true
+            }
+        })
+        var vm3 = new Vue({
+            el: '#app3',
+            data:{
+                show: true
+            }
+        })
+    </script>
+</body>
+</html>
