@@ -66,18 +66,21 @@ func main() {
 		token := context.Param("token")
 		code := ERROR
 		msg := "没有该用户"
+		var data  map[string]interface{}
+		fmt.Println("token:", token)
 		if token == "admin" {
 			code = SUCCESS
 			msg = "获取用户数据成功"
+			data = map[string]interface{}{
+				"id|1-10000": 1,
+				"name": "@cname",
+				"roles": []string{"manager"},
+			}
 		}
 		context.JSON(http.StatusOK, Response{
 			Code: code,
 			Msg:  msg,
-			Data: map[string]interface{}{
-				"id|1-10000": 1,
-				"name": "@cname",
-				"roles": []string{"manager"},
-			},
+			Data: data,
 		})
 	})
 
