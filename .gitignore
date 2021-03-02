@@ -6,6 +6,8 @@ npm-debug.log
 yarn-error.log
 
 ### vscode ###
+.idea
+.idea/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

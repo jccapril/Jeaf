@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"server/utils"
 )
 
 type Response struct {
@@ -28,6 +29,9 @@ type User struct {
 
 
 func main() {
+
+	utils.Push()
+
 	r := gin.Default()
 
 	r.POST("/user/login", func(context *gin.Context) {
