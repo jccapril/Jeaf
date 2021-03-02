@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"server/utils"
+	"server/ummessage"
 )
 
 type Response struct {
@@ -30,7 +30,12 @@ type User struct {
 
 func main() {
 
-	utils.Push()
+	ummessage := ummessage.Init("晚上好","大家晚上好","")
+	ummessage.ProductionMode = false
+	isOK,_ := ummessage.BroadCast()
+	if isOK {
+		fmt.Println("广播推送成功")
+	}
 
 	r := gin.Default()
 
