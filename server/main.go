@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"server/ummessage"
+	"server/service"
 )
 
 type Response struct {
@@ -30,12 +30,20 @@ type User struct {
 
 func main() {
 
-	ummessage := ummessage.Init("晚上好","大家晚上好","")
-	ummessage.ProductionMode = false
-	isOK,_ := ummessage.BroadCast()
-	if isOK {
-		fmt.Println("广播推送成功")
-	}
+	//ummessage := ummessage.Init("晚上好","晚上好晚上好晚上好晚上好晚上好晚上好晚上好晚" +
+	//	"晚上好晚上好晚上好晚上好晚上好晚上好晚上好晚上好晚上好" +
+	//	"晚上好晚上好晚上好晚上好晚上好上好晚上好晚上好晚上好晚上好晚上好晚上好晚上好晚上好晚上好","")
+	//ummessage.ProductionMode = false
+	//isOK,err := ummessage.BroadCast()
+	//if isOK {
+	//	fmt.Println("广播推送成功")
+	//}else  {
+	//	fmt.Println("广播推送失败",err)
+	//}
+
+	service.RunSSQ()
+
+	//return
 
 	r := gin.Default()
 
